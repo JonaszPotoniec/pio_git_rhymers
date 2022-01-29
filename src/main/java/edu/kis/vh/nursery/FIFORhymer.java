@@ -1,21 +1,29 @@
 package edu.kis.vh.nursery;
 
-public class FIFORhymer extends defaultCountingOutRhymer {
+/**
+ * First in first out type rhymer
+ */
+public class FIFORhymer extends DefaultCountingOutRhymer {
 
-	public defaultCountingOutRhymer temp = new defaultCountingOutRhymer();
-	
-	@Override
-	public int countOut() {
-		while (!callCheck())
-			
-		temp.countIn(super.countOut());
-		
-		int ret = temp.countOut();
-		
-		while (!temp.callCheck())
-			
-		countIn(temp.countOut());
-		
-		return ret;
-	}
+
+    /**
+     * Temporary rhymer used to reverse order
+     */
+    private final DefaultCountingOutRhymer temp = new DefaultCountingOutRhymer();
+
+    /**
+     * @return returns first value in contradiction to other rhymers which return last value
+     */
+    @Override
+    public int countOut() {
+        while (!callCheck())
+            temp.countIn(super.countOut());
+
+        int ret = temp.countOut();
+
+        while (!temp.callCheck())
+            countIn(temp.countOut());
+
+        return ret;
+    }
 }
